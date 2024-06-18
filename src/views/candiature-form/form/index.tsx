@@ -6,6 +6,7 @@ import useAnimation from '@/utils/hooks/useAnimation';
 import Footer from '@/components/template/Footer';
 import { StickyFooter } from '@/components/shared';
 import FormSubmit from '../components/FormSubmit';
+import useResponsive from '@/utils/hooks/useResponsive';
 
 function FormProcess() {
 
@@ -42,12 +43,14 @@ function FormProcess() {
       return LazyDefault
   }, [step])
 
+  const {smaller} = useResponsive();
+
 
   return (
     <div>
       <div className=''>
         <div className='my-2'>
-          <Steps current={step}>
+          <Steps current={step} vertical={smaller.md}>
             <Steps.Item title="Personal Information" />
             <Steps.Item title="Education" />
             <Steps.Item title="Work Experience" />
@@ -58,7 +61,7 @@ function FormProcess() {
         </div>
 
         <Suspense fallback={<div className='min-h-[40vh]'></div>}>
-          <div className={`${animateDescriptionState ? 'fadeAnimation' : ''} p-4 my-4 max-h-[70vh] overflow-y-auto`}>
+          <div className={`${animateDescriptionState ? 'fadeAnimation' : ''} p-4 my-4 lg:max-h-[70vh] lg:overflow-y-auto`}>
             <Card className=''>
               <LazyComponent />
             </Card>
